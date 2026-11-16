@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Gear Shop</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f5f1;
+            margin: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            margin: auto;
+            background-color: white;
+            padding: 15px;
+        }
+
+        .heading {
+            background-color: #14532d;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .products {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .item {
+            width: 23%;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .item img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+        }
+
+        h3 {
+            color: blue;
+            text-align: center;
+        }
+
+        .form {
+            width: 70%;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            color: #14532d;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 7px;
+            box-sizing: border-box;
+            margin-top: 4px;
+        }
+
+        button {
+            display: block;
+            width: 50%;
+            margin: 12px auto;
+            padding: 8px;
+            background-color: #087cf0;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #14532d;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+        }
+
+        .bill {
+            text-align: center;
+        }
+
+        .bill h3 {
+            color: green;
+        }
+
+        .total {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .total strong {
+            background-color: green;
+            color: white;
+            padding: 8px 20px;
+        }
+
+        .total span {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #details {
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        @media screen and (max-width: 500px) {
+            .products {
+                flex-wrap: wrap;
+            }
+
+            .item {
+                width: 45%;
+            }
+
+            .form {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2 class="heading">FITNESS GEAR SHOP</h2>
+
+        <div class="products">
+
+            <div class="item">
+                <img src="C:\Users\Bhuvaneshwari R\Downloads\dumbell.png" alt="Dumbbells">
+                <p>Dumbbells - Rs. 500</p>
+            </div>
+
+            <div class="item">
+                <img src="C:\Users\Bhuvaneshwari R\Downloads\yoga mate.png" alt="Yoga Mat">
+                <p>Yoga Mat - Rs. 300</p>
+            </div>
+
+            <div class="item">
+                <img src="C:\Users\Bhuvaneshwari R\Downloads\Gym eqipment.png" alt="Gym Equipment">
+                <p>Gym Equipment - Rs. 800</p>
+            </div>
+
+            <div class="item">
+                <img src="C:\Users\Bhuvaneshwari R\Downloads\training.png" alt="Training">
+                <p>Training - Rs. 400</p>
+            </div>
+
+        </div>
+
+        <h3>Order Fitness Products</h3>
+
+        <div class="form">
+
+            <label for="q1">Dumbbells (Quantity)</label>
+            <input type="text" id="q1" placeholder="Enter quantity">
+
+            <label for="q2">Yoga Mat (Quantity)</label>
+            <input type="text" id="q2" placeholder="Enter quantity">
+
+            <label for="q3">Gym Equipment (Quantity)</label>
+            <input type="text" id="q3" placeholder="Enter quantity">
+
+            <label for="q4">Training (Quantity)</label>
+            <input type="text" id="q4" placeholder="Enter quantity">
+
+            <button type="button" onclick="placeOrder()">Place Order</button>
+
+        </div>
+
+        <p class="message" id="message"></p>
+
+        <hr>
+
+        <div class="bill">
+
+            <h3>Purchase Order Bill!!</h3>
+
+            <div class="total">
+                <strong>Total Price</strong>
+                <span id="total">Rs. 0</span>
+            </div>
+
+            <p id="details"></p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function placeOrder() {
+
+            // Get quantity values
+
+            var q1 = document.getElementById("q1").value.trim();
+            var q2 = document.getElementById("q2").value.trim();
+            var q3 = document.getElementById("q3").value.trim();
+            var q4 = document.getElementById("q4").value.trim();
+
+            var message = document.getElementById("message");
+            var totalDisplay = document.getElementById("total");
+            var details = document.getElementById("details");
+
+            // Clear previous result
+
+            message.innerHTML = "";
+            totalDisplay.innerHTML = "Rs. 0";
+            details.innerHTML = "";
+
+            // Check empty boxes
+
+            if (q1 === "" || q2 === "" || q3 === "" || q4 === "") {
+
+                message.innerHTML = "Please fill all quantity boxes!";
+                return;
+
+            } else if (
+                !/^[0-9]+$/.test(q1) ||
+                !/^[0-9]+$/.test(q2) ||
+                !/^[0-9]+$/.test(q3) ||
+                !/^[0-9]+$/.test(q4)
+            ) {
+
+                message.innerHTML = "Enter numbers only!";
+                return;
+
+            } else if (
+                Number(q1) === 0 ||
+                Number(q2) === 0 ||
+                Number(q3) === 0 ||
+                Number(q4) === 0
+            ) {
+
+                message.innerHTML = "Quantity must be greater than zero!";
+                return;
+
+            }
+
+            // Convert quantities into numbers
+
+            var n1 = Number(q1);
+            var n2 = Number(q2);
+            var n3 = Number(q3);
+            var n4 = Number(q4);
+
+            // Calculate product prices
+
+            var a1 = n1 * 500;
+            var a2 = n2 * 300;
+            var a3 = n3 * 800;
+            var a4 = n4 * 400;
+
+            // Calculate total bill
+
+            var total = a1 + a2 + a3 + a4;
+
+            if (!Number.isSafeInteger(total)) {
+                message.innerHTML = "Total amount is too large!";
+                return;
+            }
+
+            // Display purchase bill
+
+            message.innerHTML = "Order placed successfully!";
+
+            totalDisplay.innerHTML = "Rs. " + total;
+
+            details.innerHTML =
+                "Dumbbells: Rs. " + a1 + "<br>" +
+                "Yoga Mat: Rs. " + a2 + "<br>" +
+                "Gym Equipment: Rs. " + a3 + "<br>" +
+                "Training: Rs. " + a4;
+
+        }
+
+    </script>
+
+</body>
+</html>
